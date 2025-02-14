@@ -14,26 +14,33 @@ namespace Project1_Edited.Services
 
             public bool BookRegistration(string title, string author, string genre)
             {
-                if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(genre))
-                {
-                    Console.WriteLine("Title, Author, or Genre must be filled");
-                    return false;
-                }
+               
+                    if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(genre))
+                    {
+                        Console.WriteLine("Title, Author, or Genre must be filled");
+                        return false;
+                    }
 
-                Book newBook = new Book()
-                {
-                    Title = title,
-                    Author = author,
-                    Genre = genre,
-                };
+                    Book newBook = new Book()
+                    {
+                        Title = title,
+                        Author = author,
+                        Genre = genre,
+                    };
 
-                RegisteredBooks.Add(newBook);
-                Console.WriteLine("New book added to library");
-                return true;
+                    RegisteredBooks.Add(newBook);
+                    Console.WriteLine("New book added to library");
+                    return true;
             }
 
             public List<Book> GetBooks()
             {
+                Console.WriteLine("List of books:");
+                foreach (var book in RegisteredBooks)
+                {
+                    Console.WriteLine($"Book name: {book.Title}, Author: {book.Author}, Genre: {book.Genre}");
+                }
+
                 return RegisteredBooks;
             }
 
@@ -109,6 +116,25 @@ namespace Project1_Edited.Services
                 }
                 Console.WriteLine($"Book '{title}' was not found or was not borrowed by {user.UserName}.");
                 return false;
+            }
+            public List<Book> SearchBookByFirstLetter(char firstLetter)
+            {
+                List<Book> matchingBooks = new List<Book>();
+
+                foreach (var book in RegisteredBooks)
+                {
+                    if (book.Title[0] == char.ToUpper(firstLetter))
+                    {
+                        matchingBooks.Add(book);
+                        Console.WriteLine($"Book: {book.Title}, Author: {book.Author}, Genre: {book.Genre}");
+                    }
+                }
+                if (matchingBooks.Count == 0)
+                {
+                    Console.WriteLine($"No books found starting with '{firstLetter}'");
+                }
+
+                return matchingBooks;
             }
 
         }

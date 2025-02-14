@@ -34,12 +34,13 @@ namespace Project1_Edited
                     Console.WriteLine("4. Adding new books to library");
                     Console.WriteLine("5. List all books");
                     Console.WriteLine("6. Search for books");
-                    Console.WriteLine("7. View status of books");
+                    Console.WriteLine("7. Search for books using first alphabet");
+                    Console.WriteLine("8. View status of books");
                 // } 
-                Console.WriteLine("8. Issue book");
-                Console.WriteLine("9. Returning book");
-                Console.WriteLine("10. Deleting user");
-                Console.WriteLine("11. Log out");
+                Console.WriteLine("9. Issue book");
+                Console.WriteLine("10. Returning book");
+                Console.WriteLine("11. Deleting user");
+                Console.WriteLine("12. Log out");
                 string input = Console.ReadLine();
                 if (!int.TryParse(input, out int choice))
                 {
@@ -110,8 +111,13 @@ namespace Project1_Edited
                             }
                             else
                             {
-                                Console.WriteLine("Only admins can add new books.");
+                                Console.WriteLine("There was an error adding books. Title or Author or Genre wasn't added.");
                             }
+                        }
+                        else
+                        {
+                                Console.WriteLine("Only admins can add new books.");
+                            
                         }
 
                         break;
@@ -136,7 +142,12 @@ namespace Project1_Edited
                                 bookService.SearchBook(title, author, genre);
                             
                             break;
-                    case 7:
+                        case 7:
+                        Console.Write("Please input first letter of book's title: ");
+                        char firstletter = Convert.ToChar(Console.ReadLine());
+                        bookService.SearchBookByFirstLetter(firstletter);
+                        break;
+                    case 8:
                         // if (userService.CurrentAdmin != null && userService.CurrentAdmin.UserRole == Role.Admin)
                         // {
                             bookService.ViewBookStatus();
@@ -147,7 +158,7 @@ namespace Project1_Edited
                         // }
                         break;
                     
-                    case 8:
+                    case 9:
                         if (userService.CurrentUser != null)
                         {
                         Console.Write("Please input title of the book: "); 
@@ -160,7 +171,7 @@ namespace Project1_Edited
                             Console.WriteLine("Only logged user can borrow books.");
                         }
                         break;
-                    case 9:
+                    case 10:
                         if (userService.CurrentUser != null)
                         {
                             Console.Write("Please input title of the book: "); 
@@ -172,7 +183,7 @@ namespace Project1_Edited
                             Console.WriteLine("Only logged user can borrow books.");
                         }
                         break;
-                    case 10:
+                    case 11:
                     
                         Console.Write("Please input username: ");
                         string username1 = Console.ReadLine();
@@ -182,11 +193,11 @@ namespace Project1_Edited
                         
                     
                         break;
-                    case 11:
+                    case 12:
                         userService.Logout();
                         Console.WriteLine("Thank you for using this application.!");
                         break;
-                    case 12:
+                    case 13:
                         Console.Write("Thank you for using this application.!");
                         return;
                     default:

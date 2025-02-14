@@ -114,6 +114,12 @@ namespace Project1_Edited.Services
 
         public List<User> GetUsers()
         {
+            Console.WriteLine("List of users:");
+            foreach (var user in RegisteredUsers)
+            {
+                Console.WriteLine($"User name: {user.UserName}, Role: {user.UserRole}");
+            }
+
             return RegisteredUsers;
         }
 

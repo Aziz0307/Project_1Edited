@@ -11,6 +11,7 @@ namespace Project1_Edited.Intefaces
         bool IssueBookToUser(string title, User user);
         public void ViewBookStatus();
         public bool ReturnBook(string title, User user);
+        public List<Book> SearchBookByFirstLetter(char firstLetter);
 
     }
     
